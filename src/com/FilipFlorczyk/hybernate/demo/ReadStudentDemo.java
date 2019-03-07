@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 
 import com.FilipFlorczyk.hybernate.demo.entity.Student;
 
-public class CreateStudentDemo
+public class ReadStudentDemo
 {
 
 	public static void main(String[] args)
@@ -22,7 +22,7 @@ public class CreateStudentDemo
 		{
 			System.out.println("Creating new Student object");
 
-			Student student = new Student("Filip", "Florczyk", "ff@wp.pl");
+			Student student = new Student("Dafy", "Duck", "dd@wp.pl");
 
 			session.beginTransaction();
 
@@ -31,6 +31,16 @@ public class CreateStudentDemo
 
 			session.getTransaction().commit();
 			System.out.println("Done");
+			
+			session = factory.getCurrentSession();
+			session.beginTransaction();
+			
+			System.out.println("Getting student with id: " + student.getId());
+			
+			Student theStudent = session.get(Student.class, student.getId());
+			
+			System.out.println("Done: " + theStudent);
+			
 		}
 		catch (Exception e)
 		{
